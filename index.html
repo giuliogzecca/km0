@@ -5,31 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KM0 - Il mercato trentino</title>
 
-    <!-- Libreria Supabase per comunicare con il magazzino -->
+    <!-- Libreria Supabase per la gestione dei dati nel magazzino -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <!-- Collegamento alla nuova pittura con Logo a sola linea e Banner Foto Montagna -->
+    <!-- Collegamento alla pittura visiva con Logo a linea e Banner Foto Montagna -->
     <link rel="stylesheet" href="./2026-10-17_07_stili-logo-linea-panorama.css">
 </head>
 <body>
 
-    <!-- INSEGNA PRINCIPALE CON FOTO DI MONTAGNA E LOGO A SOLA LINEA AZZURRA -->
+    <!-- INSEGNA PRINCIPALE CON FOTO DI MONTAGNA E LOGO A LINEA AZZURRA -->
     <header>
         <div class="logo-container">
-            <!-- Disegno del profilo a SOLA LINEA della Montagna (Cima bassa a sx e Cima alta a dx) -->
+            <!-- Profilo della Montagna a due cime (bassa a sx, alta a dx) -->
             <svg class="logo-montagna-linea" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- Linea del profilo della Cima Minore (bassa) -->
+                <!-- Cima Minore -->
                 <polyline points="15,110 75,45 120,110" stroke="#48cae4" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <!-- Linea cappuccio di neve Cima Minore -->
                 <path d="M 62,59 L 75,70 L 87,59" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
 
-                <!-- Linea del profilo della Cima Maggiore (alta) -->
+                <!-- Cima Maggiore -->
                 <polyline points="55,110 135,15 192,110" stroke="#00b4d8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-                <!-- Linea cappuccio di neve Cima Maggiore -->
                 <path d="M 118,37 L 135,50 L 152,37" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
 
-            <!-- Scritta KM0 di grande carattere -->
+            <!-- Scritta KM0 d'impatto -->
             <h1>KM0</h1>
         </div>
         <p>Il mercato trentino</p>
@@ -116,7 +114,7 @@
 
         </div>
 
-        <!-- MODULO D'ADESIONE -->
+        <!-- MODULO D'ADESIONE CON CASELLE SEPARATE PER "COSA OFFERI" E "COSA CERCHI" -->
         <div class="box-adesione">
             <h2 class="section-title" style="margin-top:0;">🤝 Modulo d'Adesione</h2>
             <p style="text-align:center; margin-bottom:25px;">Unisciti alla rete del mercato locale trentino. Compila la scheda per partecipare!</p>
@@ -150,9 +148,16 @@
                     <input type="text" id="contatto" placeholder="Es. info@ristorante.it oppure 333 1234567" required>
                 </div>
 
+                <!-- PRIMA CASELLA: COSA OFFERI -->
                 <div class="form-group">
-                    <label for="note">Cosa offri o di cosa hai bisogno?</label>
-                    <textarea id="note" rows="3" placeholder="Es. Ristorante cerca formaggi di malga a KM0; oppure: Produco miele e sciroppi, cerco locali a cui fornirli."></textarea>
+                    <label for="cosa-offri">🎁 Cosa offri?</label>
+                    <textarea id="cosa-offri" rows="3" placeholder="Es. Produco miele biologico, sciroppo di pino mugo, ortaggi freschi di stagione..."></textarea>
+                </div>
+
+                <!-- SECONDA CASELLA: COSA CERCHI -->
+                <div class="form-group">
+                    <label for="cosa-cerchi">🔍 Cosa cerchi?</label>
+                    <textarea id="cosa-cerchi" rows="3" placeholder="Es. Cerco ristoranti e botteghe interessati ai miei prodotti; oppure: Cerco formaggi di malga a KM0..."></textarea>
                 </div>
 
                 <button type="submit" class="btn-adesione">Invia Adesione al Mercato</button>
@@ -163,7 +168,7 @@
 
     </div>
 
-    <!-- Connessione a Supabase -->
+    <!-- Collegamento al tubo con Supabase -->
     <script src="./2026-10-17_02_supabase-config.js"></script>
     <script>
         async function inviaAdesione(event) {
@@ -176,12 +181,20 @@
             const nome = document.getElementById('nome').value;
             const comune = document.getElementById('comune').value;
             const contatto = document.getElementById('contatto').value;
-            const note = document.getElementById('note').value;
+            const cosaOffri = document.getElementById('cosa-offri').value;
+            const cosaCerchi = document.getElementById('cosa-cerchi').value;
 
             try {
                 const { error } = await supabaseClient
                     .from('adesioni')
-                    .insert([{ categoria: ruolo, nome: nome, comune: comune, contatto: contatto, note: note }]);
+                    .insert([{ 
+                        categoria: ruolo, 
+                        nome: nome, 
+                        comune: comune, 
+                        contatto: contatto, 
+                        cosa_offri: cosaOffri,
+                        cosa_cerchi: cosaCerchi
+                    }]);
 
                 msg.innerText = "🎉 Adesione ricevuta con successo! Benvenuto nel Mercato Trentino (" + ruolo + ").";
                 msg.style.color = "#2e7d32";
