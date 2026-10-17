@@ -8,12 +8,12 @@
     <!-- Libreria Supabase per comunicare con il magazzino -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <!-- Collegamento alla Pittura Solare Giallo e Verde -->
-    <link rel="stylesheet" href="./2026-10-17_04_stili-homepage.css">
+    <!-- COLLEGAMENTO AL NUOVO MATTONCINO GRAFICO CON PANORAMA E FONT ARTIGIANALE -->
+    <link rel="stylesheet" href="./2026-10-17_05_stili-natura-trentina.css">
 </head>
 <body>
 
-    <!-- INSEGNA PRINCIPALE -->
+    <!-- INSEGNA CON FONT ARTIGIANALE -->
     <header>
         <h1>KM0</h1>
         <p>Il mercato trentino</p>
@@ -21,36 +21,86 @@
 
     <div class="container">
 
-        <!-- VETRINA REPARTI CON IMMAGINI TIPICHE TRENTINE -->
-        <h2 class="section-title">Esplora i prodotti del Territorio</h2>
+        <!-- VETRINA CON TUTTI E 12 I REPARTI -->
+        <h2 class="section-title">Esplora i Prodotti della Nostra Terra</h2>
         
         <div class="grid-categorie">
-            <!-- Scheda Orto e Frutta -->
-            <div class="card-categoria" onclick="alert('Sezione Orto e Frutta in arrivo!')">
+
+            <!-- 1. Orto & Frutteto -->
+            <div class="card-categoria" onclick="alert('Sezione Orto & Frutteto in arrivo!')">
                 <img src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=500&q=80" alt="Mele e Frutta">
                 <h3>🍎 Orto & Frutteto</h3>
             </div>
 
-            <!-- Scheda Formaggi -->
-            <div class="card-categoria" onclick="alert('Sezione Formaggi di Malga in arrivo!')">
+            <!-- 2. Malga & Formaggi -->
+            <div class="card-categoria" onclick="alert('Sezione Malga & Formaggi in arrivo!')">
                 <img src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?auto=format&fit=crop&w=500&q=80" alt="Formaggi Trentini">
                 <h3>🧀 Malga & Formaggi</h3>
             </div>
 
-            <!-- Scheda Vini -->
-            <div class="card-categoria" onclick="alert('Sezione Vini e Cantine in arrivo!')">
+            <!-- 3. Prodotti Caserecci -->
+            <div class="card-categoria" onclick="alert('Sezione Prodotti Caserecci in arrivo!')">
+                <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=500&q=80" alt="Pane e Fatti in casa">
+                <h3>🥖 Prodotti Caserecci</h3>
+            </div>
+
+            <!-- 4. Sciroppi, Succhi & Bevande -->
+            <div class="card-categoria" onclick="alert('Sezione Sciroppi & Succhi in arrivo!')">
+                <img src="https://images.unsplash.com/photo-1621263764928-df1444c5e859?auto=format&fit=crop&w=500&q=80" alt="Succhi e Sciroppi">
+                <h3>🥤 Sciroppi, Succhi & Analcolici</h3>
+            </div>
+
+            <!-- 5. Funghi -->
+            <div class="card-categoria" onclick="alert('Sezione Funghi in arrivo!')">
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=500&q=80" alt="Funghi del Trentino">
+                <h3>🍄 Funghi del Territorio</h3>
+            </div>
+
+            <!-- 6. Tisane & Erbe Aromatiche -->
+            <div class="card-categoria" onclick="alert('Sezione Tisane ed Erbe in arrivo!')">
+                <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=500&q=80" alt="Tisane ed Erbe">
+                <h3>🌿 Tisane & Erbe Aromatiche</h3>
+            </div>
+
+            <!-- 7. Marmellate & Conserve -->
+            <div class="card-categoria" onclick="alert('Sezione Marmellate in arrivo!')">
+                <img src="https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?auto=format&fit=crop&w=500&q=80" alt="Marmellate">
+                <h3>🍯 Marmellate & Conserve</h3>
+            </div>
+
+            <!-- 8. Castagne -->
+            <div class="card-categoria" onclick="alert('Sezione Castagne in arrivo!')">
+                <img src="https://images.unsplash.com/photo-1508747703725-719777637510?auto=format&fit=crop&w=500&q=80" alt="Castagne">
+                <h3>🌰 Castagne & Marroni</h3>
+            </div>
+
+            <!-- 9. Piantine da Orto & Giardinaggio -->
+            <div class="card-categoria" onclick="alert('Sezione Piantine in arrivo!')">
+                <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=500&q=80" alt="Piantine da orto">
+                <h3>🌱 Piantine Orto & Giardino</h3>
+            </div>
+
+            <!-- 10. Selvaggina -->
+            <div class="card-categoria" onclick="alert('Sezione Selvaggina in arrivo!')">
+                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=500&q=80" alt="Selvaggina">
+                <h3>🦌 Selvaggina Locale</h3>
+            </div>
+
+            <!-- 11. Salumi & Tradizione -->
+            <div class="card-categoria" onclick="alert('Sezione Salumi in arrivo!')">
+                <img src="https://images.unsplash.com/photo-1514944288352-fffac99f0bdf?auto=format&fit=crop&w=500&q=80" alt="Speck e Salumi">
+                <h3>🥩 Salumi & Speck</h3>
+            </div>
+
+            <!-- 12. Cantina & Vini -->
+            <div class="card-categoria" onclick="alert('Sezione Vini in arrivo!')">
                 <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=500&q=80" alt="Vini Trentini">
                 <h3>🍷 Cantina & Vini</h3>
             </div>
 
-            <!-- Scheda Salumi -->
-            <div class="card-categoria" onclick="alert('Sezione Salumi e Speck in arrivo!')">
-                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=500&q=80" alt="Salumi Tradizionali">
-                <h3>🥩 Salumi & Tradizione</h3>
-            </div>
         </div>
 
-        <!-- MODULO D'ADESIONE COMPLETO PER LA COMUNITÀ TRENTINA -->
+        <!-- MODULO D'ADESIONE PER LA COMUNITÀ -->
         <div class="box-adesione">
             <h2 class="section-title" style="margin-top:0;">🤝 Modulo d'Adesione</h2>
             <p style="text-align:center; margin-bottom:25px;">Unisciti alla rete del mercato locale trentino. Compila la scheda per partecipare!</p>
@@ -86,7 +136,7 @@
 
                 <div class="form-group">
                     <label for="note">Cosa offri o di cosa hai bisogno?</label>
-                    <textarea id="note" rows="3" placeholder="Es. Ristorante cerca formaggi di malga a KM0; oppure: Prodotto miele biologico e cerco locali a cui fornirlo."></textarea>
+                    <textarea id="note" rows="3" placeholder="Es. Ristorante cerca formaggi di malga a KM0; oppure: Produco miele e sciroppi, cerco locali a cui fornirli."></textarea>
                 </div>
 
                 <button type="submit" class="btn-adesione">Invia Adesione al Mercato</button>
@@ -97,7 +147,7 @@
 
     </div>
 
-    <!-- Collegamento al tubo con il magazzino Supabase -->
+    <!-- Connessione a Supabase -->
     <script src="./2026-10-17_02_supabase-config.js"></script>
     <script>
         async function inviaAdesione(event) {
