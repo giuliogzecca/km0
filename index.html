@@ -5,31 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KM0 - Il mercato trentino</title>
 
-    <!-- Libreria Supabase per la gestione dei dati -->
+    <!-- Libreria Supabase per comunicare con il magazzino -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <!-- Collegamento alla nuova grafica con Logo Montagna e Sfondo Nitido -->
-    <link rel="stylesheet" href="./2026-10-17_06_stili-logo-montagna.css">
+    <!-- Collegamento alla nuova pittura con Logo a sola linea e Banner Foto Montagna -->
+    <link rel="stylesheet" href="./2026-10-17_07_stili-logo-linea-panorama.css">
 </head>
 <body>
 
-    <!-- INSEGNA PRINCIPALE CON LOGO MONTAGNA AZZURRA -->
+    <!-- INSEGNA PRINCIPALE CON FOTO DI MONTAGNA E LOGO A SOLA LINEA AZZURRA -->
     <header>
         <div class="logo-container">
-            <!-- Disegno vettoriale nitido della Montagna a due cime (una alta e una bassa) -->
-            <svg class="logo-montagna-bg" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- Cima Minore (più bassa a sinistra) -->
-                <polygon points="20,110 75,45 125,110" fill="#48cae4" opacity="0.85"/>
-                <!-- Cappuccio di neve cima minore -->
-                <polygon points="75,45 62,62 75,58 87,62" fill="#ffffff" opacity="0.9"/>
-                
-                <!-- Cima Maggiore (più alta al centro/destra) -->
-                <polygon points="60,110 135,15 190,110" fill="#00b4d8" opacity="0.95"/>
-                <!-- Cappuccio di neve cima maggiore -->
-                <polygon points="135,15 118,40 135,34 152,40" fill="#ffffff" opacity="0.95"/>
+            <!-- Disegno del profilo a SOLA LINEA della Montagna (Cima bassa a sx e Cima alta a dx) -->
+            <svg class="logo-montagna-linea" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Linea del profilo della Cima Minore (bassa) -->
+                <polyline points="15,110 75,45 120,110" stroke="#48cae4" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <!-- Linea cappuccio di neve Cima Minore -->
+                <path d="M 62,59 L 75,70 L 87,59" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+                <!-- Linea del profilo della Cima Maggiore (alta) -->
+                <polyline points="55,110 135,15 192,110" stroke="#00b4d8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                <!-- Linea cappuccio di neve Cima Maggiore -->
+                <path d="M 118,37 L 135,50 L 152,37" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
 
-            <!-- Scritta KM0 d'impatto scolpita -->
+            <!-- Scritta KM0 di grande carattere -->
             <h1>KM0</h1>
         </div>
         <p>Il mercato trentino</p>
@@ -37,7 +37,7 @@
 
     <div class="container">
 
-        <!-- VETRINA CON TUTTI E 12 I REPARTI -->
+        <!-- VETRINA CON I 12 REPARTI -->
         <h2 class="section-title">Esplora i Prodotti della Nostra Terra</h2>
         
         <div class="grid-categorie">
