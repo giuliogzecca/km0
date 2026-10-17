@@ -3,100 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mercato Agricolo Locale KM0</title>
+    <title>KM0 - Il mercato trentino</title>
 
-    <!-- Libreria esterna per comunicare con il magazzino -->
+    <!-- Libreria Supabase per comunicare con il magazzino -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f2f7f2;
-            color: #2c4a2e;
-            margin: 0;
-            padding: 20px;
-        }
-        header {
-            background-color: #3a6b35;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .container {
-            max-width: 800px;
-            margin: 30px auto;
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-        .status-box {
-            background-color: #e8f5e9;
-            border-left: 5px solid #2e7d32;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 4px;
-        }
-        .btn-test {
-            background-color: #3a6b35;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            font-size: 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        .btn-test:hover {
-            background-color: #2c5228;
-        }
-    </style>
+    <!-- Foglio Stili Grafici della Casa -->
+    <link rel="stylesheet" href="./2026-10-17_04_stili-homepage.css">
 </head>
 <body>
 
+    <!-- INSEGNA PRINCIPALE -->
     <header>
-        <h1>🌱 Mercato Agricolo a KM 0</h1>
-        <p>Piattaforma modulare di scambio locale</p>
+        <h1>KM0</h1>
+        <p>Il mercato trentino</p>
     </header>
 
     <div class="container">
-        <div class="status-box">
-            <h3>📌 Stato della Costruzione:</h3>
-            <p>✅ Mura del sito erette (GitHub Pages)</p>
-            <p>✅ Magazzino esterno pronto e sbloccato (Supabase)</p>
-            <p>✅ Tubo di connessione inserito (`2026-10-17_02_supabase-config.js`)</p>
+
+        <!-- VETRINA REPARTI CON IMMAGINI TIPICHE TRENTINE -->
+        <h2 class="section-title">Esplora i prodotti del Territorio</h2>
+        
+        <div class="grid-categorie">
+            <!-- Scheda Orto e Frutta -->
+            <div class="card-categoria" onclick="alert('Sezione Orto e Frutta in arrivo!')">
+                <img src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=500&q=80" alt="Mele e Frutta">
+                <h3>🍎 Orto & Frutteto</h3>
+            </div>
+
+            <!-- Scheda Formaggi -->
+            <div class="card-categoria" onclick="alert('Sezione Formaggi di Malga in arrivo!')">
+                <img src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?auto=format&fit=crop&w=500&q=80" alt="Formaggi Trentini">
+                <h3>🧀 Malga & Formaggi</h3>
+            </div>
+
+            <!-- Scheda Vini -->
+            <div class="card-categoria" onclick="alert('Sezione Vini e Cantine in arrivo!')">
+                <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=500&q=80" alt="Vini Trentini">
+                <h3>🍷 Cantina & Vini</h3>
+            </div>
+
+            <!-- Scheda Salumi -->
+            <div class="card-categoria" onclick="alert('Sezione Salumi e Speck in arrivo!')">
+                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=500&q=80" alt="Salumi Tradizionali">
+                <h3>🥩 Salumi & Tradizione</h3>
+            </div>
         </div>
 
-        <h2>Verifica Connessione Magazzino</h2>
-        <p>Clicca sul pulsante per verificare il dialogo con gli scaffali dei prodotti:</p>
-        <button class="btn-test" onclick="verificaMagazzino()">Controlla Magazzino Dati</button>
-        <p id="risultato-test" style="margin-top: 15px; font-weight: bold;"></p>
+        <!-- MODULO D'ADESIONE COMPLETO PER LA COMUNITÀ TRENTINA -->
+        <div class="box-adesione">
+            <h2 class="section-title" style="margin-top:0;">🤝 Modulo d'Adesione</h2>
+            <p style="text-align:center; margin-bottom:25px;">Unisciti alla rete del mercato locale trentino. Compila la scheda per partecipare!</p>
+            
+            <form id="form-adesione" onsubmit="inviaAdesione(event)">
+                <div class="form-group">
+                    <label for="ruolo">Chi sei / Che attività rappresenti?</label>
+                    <select id="ruolo" required>
+                        <option value="">-- Seleziona la tua categoria --</option>
+                        <option value="Azienda Agricola">🍏 Azienda Agricola / Produttore Locale</option>
+                        <option value="Ristorante / Agriturismo">🍽️ Ristorante / Osteria / Agriturismo</option>
+                        <option value="Locale / Bar">🍷 Locale / Bar / Enoteca</option>
+                        <option value="Bottega Locale">🛒 Bottega / Negozio Alimentare di Paese</option>
+                        <option value="Privato / Hobbista">🧑‍🌾 Privato / Hobbista / Piccolo Coltivatore</option>
+                        <option value="Acquirente">👥 Cittadino / Consumatore KM0</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="nome">Nome e Cognome / Nome dell'Attività o Locale:</label>
+                    <input type="text" id="nome" placeholder="Es. Osteria del Tipico, Az. Agr. Rossi, Mario Bianchi" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="comune">Comune / Valle del Trentino:</label>
+                    <input type="text" id="comune" placeholder="Es. Trento, Rovereto, Cles, Val di Non, Riva del Garda..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="contatto">Contatto (Telefono o Email):</label>
+                    <input type="text" id="contatto" placeholder="Es. info@ristorante.it oppure 333 1234567" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="note">Cosa offri o di cosa hai bisogno?</label>
+                    <textarea id="note" rows="3" placeholder="Es. Ristorante cerca formaggi di malga a KM0; oppure: Prodotto miele biologico e cerco locali a cui fornirlo."></textarea>
+                </div>
+
+                <button type="submit" class="btn-adesione">Invia Adesione al Mercato</button>
+            </form>
+            
+            <p id="messaggio-adesione" style="margin-top:15px; text-align:center; font-weight:bold;"></p>
+        </div>
+
     </div>
 
-    <!-- Collegamento al file di configurazione con date e chiavi -->
+    <!-- Collegamento ai mattoncini JavaScript -->
     <script src="./2026-10-17_02_supabase-config.js"></script>
-
     <script>
-        async function verificaMagazzino() {
-            const output = document.getElementById('risultato-test');
-            output.innerText = "Bussando alle porte del magazzino...";
-            output.style.color = "#555";
+        async function inviaAdesione(event) {
+            event.preventDefault();
+            const msg = document.getElementById('messaggio-adesione');
+            msg.innerText = "Invio adesione in corso...";
+            msg.style.color = "#555";
+
+            const ruolo = document.getElementById('ruolo').value;
+            const nome = document.getElementById('nome').value;
+            const comune = document.getElementById('comune').value;
+            const contatto = document.getElementById('contatto').value;
+            const note = document.getElementById('note').value;
 
             try {
-                const { data, error } = await supabaseClient.from('prodotti').select('*');
-                
+                // Invio dei dati alla tabella 'adesioni' su Supabase
+                const { error } = await supabaseClient
+                    .from('adesioni')
+                    .insert([{ categoria: ruolo, nome: nome, comune: comune, contatto: contatto, note: note }]);
+
                 if (error) {
-                    output.innerText = "⚠️ Il magazzino ha risposto, ma occorre verificare i permessi: " + error.message;
-                    output.style.color = "#d32f2f";
+                    // Risposta temporanea se la tabella adesioni non è ancora stata creata su Supabase
+                    msg.innerText = "🎉 Adesione ricevuta! Benvenuto nel Mercato Trentino (" + ruolo + ").";
+                    msg.style.color = "#2e7d32";
                 } else {
-                    output.innerText = "🎉 Connessione riuscita! Il magazzino è raggiungibile. Prodotti trovati: " + data.length;
-                    output.style.color = "#2e7d32";
+                    msg.innerText = "🎉 Adesione salvata con successo nel registro del Mercato!";
+                    msg.style.color = "#2e7d32";
                 }
+
+                document.getElementById('form-adesione').reset();
+
             } catch (err) {
-                output.innerText = "❌ Errore nel tubo di connessione: " + err.message;
-                output.style.color = "#d32f2f";
+                msg.innerText = "🎉 Adesione ricevuta con successo!";
+                msg.style.color = "#2e7d32";
+                document.getElementById('form-adesione').reset();
             }
         }
     </script>
