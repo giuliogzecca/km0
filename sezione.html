@@ -50,21 +50,27 @@
         <!-- TITOLO SEZIONE DINAMICO -->
         <h2 id="titolo-sezione-corrente" class="section-title">Sezione Prodotto</h2>
 
-        <!-- MAPPA INTERATTIVA DEL TERRITORIO -->
+        <!-- MAPPA INTERATTIVA DEL TERRITORIO CON DOPPIO INTERRUTTORE -->
         <div class="box-mappa-sezione">
             <div class="mappa-header">
-                <h3>🗺️ Mappa degli Annunci sul Territorio</h3>
+                <h3>🗺️ Mappa del Territorio</h3>
+                
+                <!-- INTERRUTTORE MAGICO COMMUTAZIONE MAPPA -->
+                <div class="switch-mappa-container">
+                    <button id="btn-map-offro" class="btn-toggle-map attivo-offro" onclick="impostaModalitaMappa('offro')">🎁 MAPPA OFFRO (Vedi Venditori)</button>
+                    <button id="btn-map-cerco" class="btn-toggle-map" onclick="impostaModalitaMappa('cerco')">🔍 MAPPA CERCO (Vedi Compratori)</button>
+                </div>
             </div>
 
             <div id="mappa-interattiva"></div>
             <div id="mappa-legenda-testo" class="mappa-info-legenda">
-                📍 Sulla mappa sono evidenziati i <b>VENDITORI E PRODUTTORI</b> che hanno pubblicato un annuncio in questa sezione. Clicca sulla spillina per vedere la foto e i contatti!
+                🎁 Modalità <b>OFFRO</b>: Sulla mappa vedi i <b>VENDITORI E PRODUTTORI</b> con i loro prodotti disponibili. Clicca sulla spillina per i dettagli!
             </div>
         </div>
 
         <!-- LISTA DEGLI ANNUNCI SPECIFICI DEL VENDITORE -->
         <div class="lista-annunci-container">
-            <h2 class="section-title">📦 Annunci Disponibili dei Venditori</h2>
+            <h2 class="section-title">📦 Bacheca degli Annunci (Offerte e Richieste)</h2>
             <div id="contenitore-annunci-grid" class="grid-annunci">
                 <p>Caricamento annunci in corso...</p>
             </div>
@@ -81,6 +87,14 @@
             </div>
 
             <form id="form-nuovo-annuncio" onsubmit="salvaNuovoAnnuncio(event)">
+                <div class="form-group" style="background:#e8f5e9; padding:15px; border-radius:12px; border:2px solid #2e7d32;">
+                    <label for="annuncio-tipo-scelta" style="color:#1b4332; font-weight:bold; font-size:1.05rem;">👉 Tipo di Annuncio (Dove vuoi che compaia sulla Mappa?):</label>
+                    <select id="annuncio-tipo-scelta" required style="font-weight:bold; font-size:1rem; color:#1b4332; border:2px solid #2e7d32; margin-top:5px;">
+                        <option value="offro">🎁 OFFRO (Voglio vendere / mettere a disposizione un prodotto)</option>
+                        <option value="cerco">🔍 CERCO (Voglio comprare / sto cercando un prodotto)</option>
+                    </select>
+                </div>
+
                 <div class="form-group">
                     <label for="annuncio-sezione-destinazione">🎯 Scegli il Reparto di Destinazione:</label>
                     <select id="annuncio-sezione-destinazione" required style="font-weight:bold; color:#1b4332; border:2px solid #2e7d32;">
@@ -102,13 +116,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="annuncio-titolo">Titolo del Prodotto / Offerta:</label>
-                    <input type="text" id="annuncio-titolo" placeholder="Es. Mirtilli freschi, Mele Renetta..." required>
+                    <label for="annuncio-titolo">Titolo dell'Annuncio / Offerta o Richiesta:</label>
+                    <input type="text" id="annuncio-titolo" placeholder="Es. Mirtilli freschi oppure Cerco legna da ardere..." required>
                 </div>
 
                 <div class="form-group">
-                    <label for="annuncio-venditore">Nome Venditore / Azienda / Hobbista:</label>
-                    <input type="text" id="annuncio-venditore" placeholder="Es. Az. Agr. Rossi, Mario Bianchi..." required>
+                    <label for="annuncio-venditore">Nome Utente / Azienda / Ristorante / Hobbista:</label>
+                    <input type="text" id="annuncio-venditore" placeholder="Es. Az. Agr. Rossi, Osteria del Tipico, Mario..." required>
                 </div>
 
                 <div class="form-group">
@@ -117,8 +131,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="annuncio-prezzo">Prezzo / Unità di Misura:</label>
-                    <input type="text" id="annuncio-prezzo" placeholder="Es. 3.50 € / vaschetta oppure 1.50 € / kg" required>
+                    <label for="annuncio-prezzo">Prezzo / Budget / Unità di Misura:</label>
+                    <input type="text" id="annuncio-prezzo" placeholder="Es. 3.50 € / vaschetta oppure Prezzo da concordare" required>
                 </div>
 
                 <div class="form-group">
@@ -127,12 +141,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="annuncio-descrizione">Descrizione Dettagliata dell'Offerta:</label>
-                    <textarea id="annuncio-descrizione" rows="3" placeholder="Descrivi il tuo prodotto..."></textarea>
+                    <label for="annuncio-descrizione">Descrizione Dettagliata:</label>
+                    <textarea id="annuncio-descrizione" rows="3" placeholder="Descrivi in dettaglio cosa offri o cosa cerchi..."></textarea>
                 </div>
 
                 <div class="form-group" style="background:#f1f8e9; padding:15px; border-radius:10px; border:2px dashed #2e7d32;">
-                    <label for="annuncio-foto" style="color:#2e7d32; font-weight:bold;">📸 Carica una Foto del tuo Prodotto (Opzionale):</label>
+                    <label for="annuncio-foto" style="color:#2e7d32; font-weight:bold;">📸 Carica una Foto per l'Annuncio (Opzionale):</label>
                     <input type="file" id="annuncio-foto" accept="image/*" style="border:none; padding:5px 0;">
                 </div>
 
@@ -168,13 +182,8 @@
                 selectCategoria.value = nomeSezione;
             }
 
-            // Inizializza la mappa e carica gli annunci con le spilline!
             if (typeof caricaAnnunciSezione === 'function') {
-                caricaAnnunciSezione(nomeSezione).then(() => {
-                    if (typeof aggiornaSpillineMappa === 'function' && window.annunciCaricatiCorrenti) {
-                        aggiornaSpillineMappa(window.annunciCaricatiCorrenti);
-                    }
-                });
+                caricaAnnunciSezione(nomeSezione);
             }
         });
     </script>
