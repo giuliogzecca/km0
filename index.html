@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KM0 - Il mercato trentino</title>
 
+    <!-- Libreria Supabase per la gestione dei dati -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <!-- Fogli di Stile -->
+    <!-- Fogli di Stile Separati, Leggeri e Datati -->
     <link rel="stylesheet" href="./2026-10-17_07_stili-logo-linea-panorama.css">
     <link rel="stylesheet" href="./2026-10-18_01_stili-annunci-sezione.css">
     <link rel="stylesheet" href="./2026-10-18_03_stili-immagini-sezioni.css">
@@ -15,7 +16,7 @@
 </head>
 <body>
 
-    <!-- INSEGNA PRINCIPALE -->
+    <!-- INSEGNA PRINCIPALE DEL SITO CON PANORAMA E LOGO MONTAGNA A LINEA AZZURRA -->
     <header>
         <div class="logo-container">
             <svg class="logo-montagna-linea" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -34,69 +35,96 @@
 
     <div class="container">
 
-        <!-- VETRINA DEI 14 REPARTI -->
+        <!-- VETRINA DEI 14 REPARTI TIPICI AGGIORNATI -->
         <h2 class="section-title">Esplora i Prodotti della Nostra Terra</h2>
         
         <div class="grid-categorie">
+            <!-- 1. Orto & Frutteto -->
             <div class="card-categoria" onclick="vaiAllaSezione('Orto & Frutteto')">
                 <img src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=800&q=80" alt="Mele e Frutta">
                 <h3>🍎 Orto & Frutteto</h3>
             </div>
-            <div class="card-categoria" onclick="vaiAllaSezione('Malga & Formaggi')">
-                <img src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?auto=format&fit=crop&w=800&q=80" alt="Formaggi">
-                <h3>🧀 Malga & Formaggi</h3>
+
+            <!-- 2. Malga, Formaggi & Latticini (AGGIORNATO) -->
+            <div class="card-categoria" onclick="vaiAllaSezione('Malga, Formaggi & Latticini')">
+                <img src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?auto=format&fit=crop&w=800&q=80" alt="Formaggi e Latticini">
+                <h3>🧀 Malga, Formaggi & Latticini</h3>
             </div>
+
+            <!-- 3. Prodotti Caserecci -->
             <div class="card-categoria" onclick="vaiAllaSezione('Prodotti Caserecci')">
-                <img src="https://images.unsplash.com/photo-1568827999250-3f0408f6b83f?auto=format&fit=crop&w=800&q=80" alt="Canederli">
+                <img src="https://images.unsplash.com/photo-1568827999250-3f0408f6b83f?auto=format&fit=crop&w=800&q=80" alt="Canederli e Spätzle">
                 <h3>🥖 Prodotti Caserecci</h3>
             </div>
+
+            <!-- 4. Sciroppi, Succhi & Analcolici -->
             <div class="card-categoria" onclick="vaiAllaSezione('Sciroppi & Bevande')">
-                <img src="https://images.unsplash.com/photo-1621263764928-df1444c5e859?auto=format&fit=crop&w=800&q=80" alt="Succhi">
+                <img src="https://images.unsplash.com/photo-1621263764928-df1444c5e859?auto=format&fit=crop&w=800&q=80" alt="Succhi e Sciroppi">
                 <h3>🥤 Sciroppi, Succhi & Analcolici</h3>
             </div>
+
+            <!-- 5. Funghi del Territorio -->
             <div class="card-categoria" onclick="vaiAllaSezione('Funghi')">
-                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80" alt="Funghi">
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80" alt="Funghi Porcini">
                 <h3>🍄 Funghi del Territorio</h3>
             </div>
+
+            <!-- 6. Tisane & Erbe Aromatiche -->
             <div class="card-categoria" onclick="vaiAllaSezione('Tisane & Erbe')">
-                <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=80" alt="Tisane">
+                <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=80" alt="Tisane ed Erbe">
                 <h3>🌿 Tisane & Erbe Aromatiche</h3>
             </div>
+
+            <!-- 7. Marmellate & Conserve -->
             <div class="card-categoria" onclick="vaiAllaSezione('Marmellate & Conserve')">
                 <img src="https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?auto=format&fit=crop&w=800&q=80" alt="Marmellate">
                 <h3>🍯 Marmellate & Conserve</h3>
             </div>
+
+            <!-- 8. Castagne, Marroni & Miele -->
             <div class="card-categoria" onclick="vaiAllaSezione('Castagne, Marroni & Miele')">
-                <img src="https://images.unsplash.com/photo-1508747703725-719777637510?auto=format&fit=crop&w=800&q=80" alt="Castagne">
+                <img src="https://images.unsplash.com/photo-1508747703725-719777637510?auto=format&fit=crop&w=800&q=80" alt="Castagne e Miele">
                 <h3>🌰 Castagne, Marroni & Miele</h3>
             </div>
+
+            <!-- 9. Legna, Pellet & Biomasse -->
             <div class="card-categoria" onclick="vaiAllaSezione('Legna, Pellet & Biomasse')">
-                <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80" alt="Legna">
+                <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80" alt="Legna e Pellet">
                 <h3>🪵 Legna, Pellet & Biomasse</h3>
             </div>
+
+            <!-- 10. Pescato Locale -->
             <div class="card-categoria" onclick="vaiAllaSezione('Pescato Locale')">
-                <img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=800&q=80" alt="Pescato">
+                <img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=800&q=80" alt="Pesce Fresco">
                 <h3>🐟 Pescato Locale</h3>
             </div>
+
+            <!-- 11. Piantine Orto & Giardino -->
             <div class="card-categoria" onclick="vaiAllaSezione('Piantine Orto & Giardino')">
                 <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=800&q=80" alt="Piantine">
                 <h3>🌱 Piantine Orto & Giardino</h3>
             </div>
-            <div class="card-categoria" onclick="vaiAllaSezione('Selvaggina')">
-                <img src="https://images.unsplash.com/photo-1484406566174-9da000fda645?auto=format&fit=crop&w=800&q=80" alt="Selvaggina">
-                <h3>🦌 Selvaggina Locale</h3>
+
+            <!-- 12. Selvaggina & Carni Allevate (AGGIORNATO) -->
+            <div class="card-categoria" onclick="vaiAllaSezione('Selvaggina & Carni Allevate')">
+                <img src="https://images.unsplash.com/photo-1484406566174-9da000fda645?auto=format&fit=crop&w=800&q=80" alt="Cervo, Capriolo e Carni Allevate">
+                <h3>🦌 Selvaggina & Carni Allevate</h3>
             </div>
+
+            <!-- 13. Salumi & Speck -->
             <div class="card-categoria" onclick="vaiAllaSezione('Salumi & Speck')">
-                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="Speck">
+                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="Speck in Montagna">
                 <h3>🥩 Salumi & Speck</h3>
             </div>
+
+            <!-- 14. Cantina & Vini -->
             <div class="card-categoria" onclick="vaiAllaSezione('Cantina & Vini')">
-                <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80" alt="Vini">
+                <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80" alt="Vini Trentini">
                 <h3>🍷 Cantina & Vini</h3>
             </div>
         </div>
 
-        <!-- MODULO D'ADESIONE -->
+        <!-- MODULO D'ADESIONE COMUNITARIO -->
         <div class="box-adesione">
             <h2 class="section-title" style="margin-top:0;">🤝 Modulo d'Adesione</h2>
             <p style="text-align:center; margin-bottom:25px;">Unisciti alla rete del mercato locale trentino. Compila la scheda per partecipare!</p>
@@ -107,7 +135,7 @@
                     <select id="ruolo" required>
                         <option value="">-- Seleziona la tua categoria --</option>
                         <option value="Azienda Agricola">🍏 Azienda Agricola / Produttore Locale</option>
-                        <option value="Allevatore Ittico / Pesca">🐟 Allevamento Ittico / Pescato Locale</option>
+                        <option value="Allevatore / Pesca">🐮 Allevatore / Pesca / Produttore Carni</option>
                         <option value="Azienda Forestale / Legna">🪵 Boscaiolo / Produttore Legna e Pellet</option>
                         <option value="Ristorante / Agriturismo">🍽️ Ristorante / Osteria / Agriturismo</option>
                         <option value="Locale / Bar">🍷 Locale / Bar / Enoteca</option>
@@ -134,7 +162,7 @@
 
                 <div class="form-group">
                     <label for="cosa-offri">🎁 Cosa offri?</label>
-                    <textarea id="cosa-offri" rows="3" placeholder="Es. Produco miele biologico, legna di faggio, speck stagionato..."></textarea>
+                    <textarea id="cosa-offri" rows="3" placeholder="Es. Produco formaggi di malga, latte fresco, carne allevata locale, legna di faggio..."></textarea>
                 </div>
 
                 <div class="form-group">
@@ -149,7 +177,7 @@
 
     </div>
 
-    <!-- FINETRA POPUP PER INSERIRE UN ANNUNCIO CON SELEZIONE CATEGORIA -->
+    <!-- FINETRA POPUP PER INSERIRE UN ANNUNCIO -->
     <div id="modal-annuncio-overlay" class="modal-overlay">
         <div class="modal-contenuto">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
@@ -158,12 +186,11 @@
             </div>
 
             <form id="form-nuovo-annuncio" onsubmit="salvaNuovoAnnuncio(event)">
-                <!-- SELEZIONE DELLA CATEGORIA DI DESTINAZIONE -->
                 <div class="form-group">
                     <label for="annuncio-sezione-destinazione">🎯 Scegli il Reparto di Destinazione dell'Annuncio:</label>
                     <select id="annuncio-sezione-destinazione" required style="font-weight:bold; color:#1b4332; border:2px solid #2e7d32;">
                         <option value="Orto & Frutteto">🍎 Orto & Frutteto</option>
-                        <option value="Malga & Formaggi">🧀 Malga & Formaggi</option>
+                        <option value="Malga, Formaggi & Latticini">🧀 Malga, Formaggi & Latticini</option>
                         <option value="Prodotti Caserecci">🥖 Prodotti Caserecci</option>
                         <option value="Sciroppi & Bevande">🥤 Sciroppi, Succhi & Analcolici</option>
                         <option value="Funghi">🍄 Funghi del Territorio</option>
@@ -173,7 +200,7 @@
                         <option value="Legna, Pellet & Biomasse">🪵 Legna, Pellet & Biomasse</option>
                         <option value="Pescato Locale">🐟 Pescato Locale</option>
                         <option value="Piantine Orto & Giardino">🌱 Piantine Orto & Giardino</option>
-                        <option value="Selvaggina">🦌 Selvaggina Locale</option>
+                        <option value="Selvaggina & Carni Allevate">🦌 Selvaggina & Carni Allevate</option>
                         <option value="Salumi & Speck">🥩 Salumi & Speck</option>
                         <option value="Cantina & Vini">🍷 Cantina & Vini</option>
                     </select>
@@ -181,22 +208,22 @@
 
                 <div class="form-group">
                     <label for="annuncio-titolo">Titolo del Prodotto / Offerta:</label>
-                    <input type="text" id="annuncio-titolo" placeholder="Es. Cassetta Mirtilli, Bancale Legna Faggio..." required>
+                    <input type="text" id="annuncio-titolo" placeholder="Es. Formaggio Casolét, Carne Bovino Locale..." required>
                 </div>
 
                 <div class="form-group">
                     <label for="annuncio-venditore">Nome Venditore / Azienda / Hobbista:</label>
-                    <input type="text" id="annuncio-venditore" placeholder="Es. Az. Agr. Rossi, Mario Bianchi..." required>
+                    <input type="text" id="annuncio-venditore" placeholder="Es. Malga Alta, Az. Agr. Rossi..." required>
                 </div>
 
                 <div class="form-group">
                     <label for="annuncio-comune">Comune / Valle del Trentino:</label>
-                    <input type="text" id="annuncio-comune" placeholder="Es. Cles, Trento, Rovereto, Val di Fiemme..." required>
+                    <input type="text" id="annuncio-comune" placeholder="Es. Cles, Trento, Rovereto, Val di Sole..." required>
                 </div>
 
                 <div class="form-group">
                     <label for="annuncio-prezzo">Prezzo / Unità di Misura:</label>
-                    <input type="text" id="annuncio-prezzo" placeholder="Es. 1.50 € / kg oppure 80 € / bancale" required>
+                    <input type="text" id="annuncio-prezzo" placeholder="Es. 12.00 € / kg oppure 1.50 € / litro" required>
                 </div>
 
                 <div class="form-group">
