@@ -39,13 +39,13 @@
         <h2 class="section-title">Esplora i Prodotti della Nostra Terra</h2>
         
         <div class="grid-categorie">
-            <!-- 1. Orto & Frutteto -->
-            <div class="card-categoria" onclick="vaiAllaSezione('Orto & Frutteto')">
-                <img src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=800&q=80" alt="Mele e Frutta">
-                <h3>🍎 Orto & Frutteto</h3>
+            <!-- 1. Orto, Frutteto & Piccoli Frutti (AGGIORNATO) -->
+            <div class="card-categoria" onclick="vaiAllaSezione('Orto, Frutteto & Piccoli Frutti')">
+                <img src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=800&q=80" alt="Mele, Frutta e Piccoli Frutti Trentini">
+                <h3>🍎 Orto, Frutteto & Piccoli Frutti</h3>
             </div>
 
-            <!-- 2. Malga, Formaggi & Latticini (AGGIORNATO) -->
+            <!-- 2. Malga, Formaggi & Latticini -->
             <div class="card-categoria" onclick="vaiAllaSezione('Malga, Formaggi & Latticini')">
                 <img src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?auto=format&fit=crop&w=800&q=80" alt="Formaggi e Latticini">
                 <h3>🧀 Malga, Formaggi & Latticini</h3>
@@ -105,7 +105,7 @@
                 <h3>🌱 Piantine Orto & Giardino</h3>
             </div>
 
-            <!-- 12. Selvaggina & Carni Allevate (AGGIORNATO) -->
+            <!-- 12. Selvaggina & Carni Allevate -->
             <div class="card-categoria" onclick="vaiAllaSezione('Selvaggina & Carni Allevate')">
                 <img src="https://images.unsplash.com/photo-1484406566174-9da000fda645?auto=format&fit=crop&w=800&q=80" alt="Cervo, Capriolo e Carni Allevate">
                 <h3>🦌 Selvaggina & Carni Allevate</h3>
@@ -152,7 +152,7 @@
 
                 <div class="form-group">
                     <label for="comune">Comune / Valle del Trentino:</label>
-                    <input type="text" id="comune" placeholder="Es. Trento, Rovereto, Cles, Val di Non, Riva del Garda..." required>
+                    <input type="text" id="comune" placeholder="Es. Trento, Rovereto, Cles, Val di Non, Val di Cembra..." required>
                 </div>
 
                 <div class="form-group">
@@ -162,12 +162,12 @@
 
                 <div class="form-group">
                     <label for="cosa-offri">🎁 Cosa offri?</label>
-                    <textarea id="cosa-offri" rows="3" placeholder="Es. Produco formaggi di malga, latte fresco, carne allevata locale, legna di faggio..."></textarea>
+                    <textarea id="cosa-offri" rows="3" placeholder="Es. Produco mele Renetta, mirtilli, lamponi, formaggi di malga, legna di faggio..."></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="cosa-cerchi">🔍 Cosa cerchi?</label>
-                    <textarea id="cosa-cerchi" rows="3" placeholder="Es. Cerco ristoranti e botteghe interessati ai miei prodotti..."></textarea>
+                    <textarea id="cosa-cerchi" rows="3" placeholder="Es. Cerco ristoranti e botteghe interessati ai miei prodotti locali..."></textarea>
                 </div>
 
                 <button type="submit" class="btn-adesione">Invia Adesione al Mercato</button>
@@ -189,7 +189,7 @@
                 <div class="form-group">
                     <label for="annuncio-sezione-destinazione">🎯 Scegli il Reparto di Destinazione dell'Annuncio:</label>
                     <select id="annuncio-sezione-destinazione" required style="font-weight:bold; color:#1b4332; border:2px solid #2e7d32;">
-                        <option value="Orto & Frutteto">🍎 Orto & Frutteto</option>
+                        <option value="Orto, Frutteto & Piccoli Frutti">🍎 Orto, Frutteto & Piccoli Frutti</option>
                         <option value="Malga, Formaggi & Latticini">🧀 Malga, Formaggi & Latticini</option>
                         <option value="Prodotti Caserecci">🥖 Prodotti Caserecci</option>
                         <option value="Sciroppi & Bevande">🥤 Sciroppi, Succhi & Analcolici</option>
@@ -208,22 +208,22 @@
 
                 <div class="form-group">
                     <label for="annuncio-titolo">Titolo del Prodotto / Offerta:</label>
-                    <input type="text" id="annuncio-titolo" placeholder="Es. Formaggio Casolét, Carne Bovino Locale..." required>
+                    <input type="text" id="annuncio-titolo" placeholder="Es. Mirtilli freschi, Mele Renetta, Cassetta Lamponi..." required>
                 </div>
 
                 <div class="form-group">
                     <label for="annuncio-venditore">Nome Venditore / Azienda / Hobbista:</label>
-                    <input type="text" id="annuncio-venditore" placeholder="Es. Malga Alta, Az. Agr. Rossi..." required>
+                    <input type="text" id="annuncio-venditore" placeholder="Es. Az. Agr. Rossi, Mario Bianchi..." required>
                 </div>
 
                 <div class="form-group">
                     <label for="annuncio-comune">Comune / Valle del Trentino:</label>
-                    <input type="text" id="annuncio-comune" placeholder="Es. Cles, Trento, Rovereto, Val di Sole..." required>
+                    <input type="text" id="annuncio-comune" placeholder="Es. Cles, Trento, Cembra, Val di Sole..." required>
                 </div>
 
                 <div class="form-group">
                     <label for="annuncio-prezzo">Prezzo / Unità di Misura:</label>
-                    <input type="text" id="annuncio-prezzo" placeholder="Es. 12.00 € / kg oppure 1.50 € / litro" required>
+                    <input type="text" id="annuncio-prezzo" placeholder="Es. 3.50 € / vaschetta oppure 1.50 € / kg" required>
                 </div>
 
                 <div class="form-group">
@@ -302,4 +302,4 @@
     </script>
 
 </body>
-</html>
+</html></html>
