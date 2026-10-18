@@ -1,13 +1,15 @@
 // --- CERVELLO GESTIONE ANNUNCI, CATEGORIE E CARICAMENTO FOTO VENDITORE ---
 
+window.annunciCaricatiCorrenti = [];
+
 // Dati simulati di dimostrazione se la tabella su Supabase è ancora vuota
 const annunciEsempio = [
     {
-        titolo: "Cassetta Mele Renetta Biologiche",
+        titolo: "Cassetta Mirtilli e Mele Renetta",
         venditore: "Az. Agr. Rossi Mario",
-        comune: "Cles (Val di Non)",
-        prezzo: "1.50 € / kg",
-        descrizione: "Mele fresche appena raccolte, coltivate senza pesticidi.",
+        comune: "Cles",
+        prezzo: "3.50 € / vaschetta",
+        descrizione: "Mirtilli freschi di montagna e mele Renetta della Val di Non.",
         contatto: "333 1234567",
         foto_url: "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=600&q=80"
     }
@@ -28,12 +30,20 @@ async function caricaAnnunciSezione(nomeSezione) {
             .order('created_at', { ascending: false });
 
         if (error || !prodotti || prodotti.length === 0) {
+            window.annunciCaricatiCorrenti = annunciEsempio;
             mostraAnnunci(annunciEsempio);
         } else {
+            window.annunciCaricatiCorrenti = prodotti;
             mostraAnnunci(prodotti);
         }
     } catch (err) {
+        window.annunciCaricatiCorrenti = annunciEsempio;
         mostraAnnunci(annunciEsempio);
+    }
+
+    // Aggiorna subito la mappa con le spilline!
+    if (typeof aggiornaSpillineMappa === 'function') {
+        aggiornaSpillineMappa(window.annunciCaricatiCorrenti);
     }
 }
 
@@ -75,7 +85,6 @@ async function salvaNuovoAnnuncio(event) {
     msg.innerText = "Caricamento foto e salvataggio in corso...";
     msg.style.color = "#555";
 
-    // Legge la categoria scelta dal menu a tendina
     const categoriaSelezionata = document.getElementById('annuncio-sezione-destinazione').value;
     const titolo = document.getElementById('annuncio-titolo').value;
     const venditore = document.getElementById('annuncio-venditore').value;
