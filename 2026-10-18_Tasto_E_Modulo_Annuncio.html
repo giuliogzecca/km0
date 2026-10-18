@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inserisci Annuncio con Sezioni</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f6f8; }
+        .btn-nuovo { background-color: #2e7d32; color: white; padding: 12px 20px; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold; }
+        .btn-nuovo:hover { background-color: #1b5e20; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; }
+        .modal-contenuto { background: white; padding: 25px; border-radius: 8px; width: 90%; max-width: 480px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .campo { margin-bottom: 15px; }
+        .campo label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .campo input, .campo select, .campo textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .suggerimento { font-size: 13px; color: #0288d1; margin-top: 4px; font-weight: bold; display: none; }
+        .azioni { display: flex; justify-content: space-between; margin-top: 20px; }
+        .btn-invia { background-color: #0288d1; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; }
+        .btn-annulla { background-color: #d32f2f; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <!-- Tasto principale -->
+    <button class="btn-nuovo" onclick="apriModulo()">+ Inserisci Nuovo Annuncio</button>
+
+    <!-- Modulo per l'annuncio -->
+    <div id="finestraModulo" class="modal">
+        <div class="modal-contenuto">
+            <h2>Nuovo Annuncio</h2>
+            <form id="formAnnuncio">
+                
+                <!-- Titolo Prodotto -->
+                <div class="campo">
+                    <label for="titolo">Nome del prodotto:</label>
+                    <input type="text" id="titolo" placeholder="Es. Pomodori, Miele, Legna..." oninput="suggerisciSezione()" required>
+                    <!-- Messaggio dell'assistente automatico -->
+                    <div id="testoSuggerimento" class="suggerimento"></div>
+                </div>
+
+                <!-- Sezione / Reparto -->
+                <div class="campo">
+                    <label for="sezione">Seleziona la Sezione del sito:</label>
+                    <select id="sezione" required>
+                        <option value="">-- Scegli una sezione --</option>
+                        <option value="orto">Orto e Frutta</option>
+                        <option value="miele">Miele e Conserve</option>
+                        <option value="legna">Legna e Pellets</option>
+                        <option value="animali">Prodotti per Animali</option>
+                        <option value="altro">Altro</option>
+                    </select>
+                </div>
+
+                <!-- Prezzo -->
+                <div class="campo">
+                    <label for="prezzo">Prezzo (€):</label>
+                    <input type="number" step="0.01" id="prezzo" placeholder="Es. 4.50" required>
+                </div>
+
+                <!-- Descrizione -->
+                <div class="campo">
+                    <label for="descrizione">Descrizione:</label>
+                    <textarea id="descrizione" rows="3" placeholder="Descrivi il tuo prodotto..." required></textarea>
+                </div>
+
+                <!-- Foto -->
+                <div class="campo">
+                    <label for="immagine">Foto del prodotto:</label>
+                    <input type="file" id="immagine" accept="image/*">
+                </div>
+
+                <!-- Tasti di azione -->
+                <div class="azioni">
+                    <button type="button" class="btn-annulla" onclick="chiudiModulo()">Annulla</button>
+                    <button type="submit" class="btn-invia">Pubblica Annuncio</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- Collegamento al cervello della pagina -->
+    <script src="2026-10-18_Logica_Suggerimento_Sezioni.js"></script>
+
+</body>
+</html>
