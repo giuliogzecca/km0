@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KM0 - Sezione Prodotto</title>
 
-    <!-- Supabase e Mappa Leaflet -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
@@ -15,6 +13,7 @@
     <link rel="stylesheet" href="./2026-10-17_07_stili-logo-linea-panorama.css">
     <link rel="stylesheet" href="./2026-10-17_08_stili-mappa.css">
     <link rel="stylesheet" href="./2026-10-18_01_stili-annunci-sezione.css">
+    <link rel="stylesheet" href="./2026-10-18_04_stili-pulsante-fluttuante.css">
 </head>
 <body>
 
@@ -32,6 +31,9 @@
         <p>Il mercato trentino</p>
     </header>
 
+    <!-- PULSANTE VERDE FLUTTUANTE "+" -->
+    <button class="btn-fluttuante-annuncio" onclick="apriModuloAnnuncio()" title="Inserisci Annuncio">+</button>
+
     <div class="container">
 
         <!-- BOTTONI DI NAVIGAZIONE E INSERIMENTO ANNUNCIO -->
@@ -40,64 +42,13 @@
                 ⬅️ Torna a tutte le Sezioni
             </a>
 
-            <!-- PULSANTE MAGICO PER PUBBLICARE UN ANNUNCIO -->
             <button onclick="apriModuloAnnuncio()" style="background:linear-gradient(135deg, #2e7d32 0%, #388e3c 100%); color:white; border:none; padding:12px 24px; border-radius:10px; font-weight:bold; font-size:1.1rem; cursor:pointer; box-shadow:0 4px 12px rgba(46,125,50,0.3);">
-                ➕ Inserisci il tuo Annuncio con Foto
+                ➕ Inserisci Annuncio in questo Reparto
             </button>
         </div>
 
         <!-- TITOLO SEZIONE DINAMICO -->
         <h2 id="titolo-sezione-corrente" class="section-title">Sezione Prodotto</h2>
-
-        <!-- MODULO A COMPARSA PER COMPILARE L'ANNUNCIO CON FOTO -->
-        <div id="box-nuovo-annuncio" class="box-adesione" style="display:none; margin-bottom:35px; border-color:#2e7d32; background:#f1f8e9;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-                <h3 style="margin:0; color:#1b4332; font-size:1.5rem;">📝 Compila il tuo Annuncio per questa Sezione</h3>
-                <button onclick="chiudiModuloAnnuncio()" style="background:#e53935; color:white; border:none; padding:6px 12px; border-radius:6px; font-weight:bold; cursor:pointer;">✖ Chiudi</button>
-            </div>
-
-            <form id="form-nuovo-annuncio" onsubmit="salvaNuovoAnnuncio(event)">
-                <div class="form-group">
-                    <label for="annuncio-titolo">Titolo del Prodotto / Offerta:</label>
-                    <input type="text" id="annuncio-titolo" placeholder="Es. Mele Renetta, Cassetta Mirtilli, Legna da Ardere..." required>
-                </div>
-
-                <div class="form-group">
-                    <label for="annuncio-venditore">Nome Venditore / Azienda / Hobbista:</label>
-                    <input type="text" id="annuncio-venditore" placeholder="Es. Az. Agr. Rossi, Mario Bianchi..." required>
-                </div>
-
-                <div class="form-group">
-                    <label for="annuncio-comune">Comune / Valle del Trentino:</label>
-                    <input type="text" id="annuncio-comune" placeholder="Es. Cles, Trento, Rovereto, Val di Fiemme..." required>
-                </div>
-
-                <div class="form-group">
-                    <label for="annuncio-prezzo">Prezzo / Unità di Misura:</label>
-                    <input type="text" id="annuncio-prezzo" placeholder="Es. 1.50 € / kg oppure 80 € / bancale" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="annuncio-contatto">Contatto Diretto (Telefono o Email):</label>
-                    <input type="text" id="annuncio-contatto" placeholder="Es. 333 1234567 oppure info@azienda.it" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="annuncio-descrizione">Descrizione Dettagliata dell'Offerta:</label>
-                    <textarea id="annuncio-descrizione" rows="3" placeholder="Descrivi il tuo prodotto, la disponibilità e le modalità di consegna o ritiro..."></textarea>
-                </div>
-
-                <!-- CAMPO FOTO PRODOTTO -->
-                <div class="form-group" style="background:#ffffff; padding:15px; border-radius:10px; border:2px dashed #2e7d32;">
-                    <label for="annuncio-foto" style="color:#2e7d32; font-weight:bold;">📸 Carica una Foto del tuo Prodotto (Opzionale):</label>
-                    <input type="file" id="annuncio-foto" accept="image/*" style="border:none; padding:5px 0;">
-                </div>
-
-                <button type="submit" class="btn-adesione" style="background:linear-gradient(135deg, #2e7d32 0%, #388e3c 100%); color:white;">Pubblica Annuncio Ora</button>
-            </form>
-
-            <p id="messaggio-invio-annuncio" style="margin-top:15px; text-align:center; font-weight:bold;"></p>
-        </div>
 
         <!-- MAPPA INTERATTIVA DEL TERRITORIO -->
         <div class="box-mappa-sezione">
@@ -112,7 +63,7 @@
 
             <div id="mappa-interattiva"></div>
             <div id="mappa-legenda-testo" class="mappa-info-legenda">
-                🎁 Modalità OFFRO: Sulla mappa sono evidenziati i <b>COMPRATORI</b> (Ristoranti, Locali, Botteghe e Cittadini) che cercano i prodotti di questa sezione.
+                🎁 Modalità OFFRO: Sulla mappa sono evidenziati i <b>COMPRATORI</b> che cercano i prodotti di questa sezione.
             </div>
         </div>
 
@@ -126,18 +77,89 @@
 
     </div>
 
-    <!-- Script di gestione dei mattoncini JavaScript -->
+    <!-- FINETRA POPUP PER INSERIRE L'ANNUNCIO -->
+    <div id="modal-annuncio-overlay" class="modal-overlay">
+        <div class="modal-contenuto">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                <h3 style="margin:0; color:#1b4332; font-size:1.4rem;">📝 Pubblica il tuo Annuncio con Foto</h3>
+                <button onclick="chiudiModuloAnnuncio()" style="background:#e53935; color:white; border:none; padding:6px 12px; border-radius:8px; font-weight:bold; cursor:pointer;">✖ Chiudi</button>
+            </div>
+
+            <form id="form-nuovo-annuncio" onsubmit="salvaNuovoAnnuncio(event)">
+                <!-- SELEZIONE CATEGORIA -->
+                <div class="form-group">
+                    <label for="annuncio-sezione-destinazione">🎯 Scegli il Reparto di Destinazione:</label>
+                    <select id="annuncio-sezione-destinazione" required style="font-weight:bold; color:#1b4332; border:2px solid #2e7d32;">
+                        <option value="Orto & Frutteto">🍎 Orto & Frutteto</option>
+                        <option value="Malga & Formaggi">🧀 Malga & Formaggi</option>
+                        <option value="Prodotti Caserecci">🥖 Prodotti Caserecci</option>
+                        <option value="Sciroppi & Bevande">🥤 Sciroppi, Succhi & Analcolici</option>
+                        <option value="Funghi">🍄 Funghi del Territorio</option>
+                        <option value="Tisane & Erbe">🌿 Tisane & Erbe Aromatiche</option>
+                        <option value="Marmellate & Conserve">🍯 Marmellate & Conserve</option>
+                        <option value="Castagne, Marroni & Miele">🌰 Castagne, Marroni & Miele</option>
+                        <option value="Legna, Pellet & Biomasse">🪵 Legna, Pellet & Biomasse</option>
+                        <option value="Pescato Locale">🐟 Pescato Locale</option>
+                        <option value="Piantine Orto & Giardino">🌱 Piantine Orto & Giardino</option>
+                        <option value="Selvaggina">🦌 Selvaggina Locale</option>
+                        <option value="Salumi & Speck">🥩 Salumi & Speck</option>
+                        <option value="Cantina & Vini">🍷 Cantina & Vini</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="annuncio-titolo">Titolo del Prodotto / Offerta:</label>
+                    <input type="text" id="annuncio-titolo" placeholder="Es. Mele Renetta, Cassetta Mirtilli..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="annuncio-venditore">Nome Venditore / Azienda / Hobbista:</label>
+                    <input type="text" id="annuncio-venditore" placeholder="Es. Az. Agr. Rossi, Mario Bianchi..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="annuncio-comune">Comune / Valle del Trentino:</label>
+                    <input type="text" id="annuncio-comune" placeholder="Es. Cles, Trento, Rovereto..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="annuncio-prezzo">Prezzo / Unità di Misura:</label>
+                    <input type="text" id="annuncio-prezzo" placeholder="Es. 1.50 € / kg oppure 80 € / bancale" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="annuncio-contatto">Contatto Diretto (Telefono o Email):</label>
+                    <input type="text" id="annuncio-contatto" placeholder="Es. 333 1234567 oppure info@azienda.it" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="annuncio-descrizione">Descrizione Dettagliata dell'Offerta:</label>
+                    <textarea id="annuncio-descrizione" rows="3" placeholder="Descrivi il tuo prodotto..."></textarea>
+                </div>
+
+                <div class="form-group" style="background:#f1f8e9; padding:15px; border-radius:10px; border:2px dashed #2e7d32;">
+                    <label for="annuncio-foto" style="color:#2e7d32; font-weight:bold;">📸 Carica una Foto del tuo Prodotto (Opzionale):</label>
+                    <input type="file" id="annuncio-foto" accept="image/*" style="border:none; padding:5px 0;">
+                </div>
+
+                <button type="submit" class="btn-adesione" style="background:linear-gradient(135deg, #2e7d32 0%, #388e3c 100%); color:white;">Pubblica Annuncio Ora</button>
+            </form>
+
+            <p id="messaggio-invio-annuncio" style="margin-top:15px; text-align:center; font-weight:bold;"></p>
+        </div>
+    </div>
+
+    <!-- Script di gestione -->
     <script src="./2026-10-17_02_supabase-config.js"></script>
     <script src="./2026-10-17_09_mappa-manager.js"></script>
     <script src="./2026-10-18_02_annunci-manager.js"></script>
     <script>
         function apriModuloAnnuncio() {
-            document.getElementById('box-nuovo-annuncio').style.display = 'block';
-            document.getElementById('box-nuovo-annuncio').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('modal-annuncio-overlay').style.display = 'flex';
         }
 
         function chiudiModuloAnnuncio() {
-            document.getElementById('box-nuovo-annuncio').style.display = 'none';
+            document.getElementById('modal-annuncio-overlay').style.display = 'none';
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -146,6 +168,12 @@
 
             document.getElementById('titolo-sezione-corrente').innerText = "Reparto: " + nomeSezione;
             document.title = "KM0 - " + nomeSezione;
+
+            // Pre-seleziona la categoria corrente nel menu a tendina del popup!
+            const selectCategoria = document.getElementById('annuncio-sezione-destinazione');
+            if (selectCategoria) {
+                selectCategoria.value = nomeSezione;
+            }
 
             if (typeof caricaAnnunciSezione === 'function') {
                 caricaAnnunciSezione(nomeSezione);
