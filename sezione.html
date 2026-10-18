@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KM0 - Sezione Prodotto</title>
+
+    <!-- Supabase e Mappa Leaflet -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- Fogli di Stile Separati -->
+    <link rel="stylesheet" href="./2026-10-17_07_stili-logo-linea-panorama.css">
+    <link rel="stylesheet" href="./2026-10-17_08_stili-mappa.css">
+    <link rel="stylesheet" href="./2026-10-18_01_stili-annunci-sezione.css">
+</head>
+<body>
+
+    <!-- INSEGNA PRINCIPALE IDENTICA ALLA HOME -->
+    <header>
+        <div class="logo-container">
+            <svg class="logo-montagna-linea" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <polyline points="15,110 75,45 120,110" stroke="#48cae4" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M 62,59 L 75,70 L 87,59" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <polyline points="55,110 135,15 192,110" stroke="#00b4d8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M 118,37 L 135,50 L 152,37" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h1>KM0</h1>
+        </div>
+        <p>Il mercato trentino</p>
+    </header>
+
+    <div class="container">
+
+        <!-- BOTTONE PER TORNARE ALLA HOME -->
+        <div style="margin-bottom:25px;">
+            <a href="index.html" style="display:inline-block; background:#2d6a4f; color:white; padding:10px 20px; border-radius:10px; text-decoration:none; font-weight:bold;">
+                ⬅️ Torna a tutte le Sezioni
+            </a>
+        </div>
+
+        <!-- TITOLO SEZIONE DINAMICO -->
+        <h2 id="titolo-sezione-corrente" class="section-title">Sezione Prodotto</h2>
+
+        <!-- MAPPA INTERATTIVA DEL TERRITORIO -->
+        <div class="box-mappa-sezione">
+            <div class="mappa-header">
+                <h3>🗺️ Mappa del Territorio</h3>
+                
+                <div class="switch-mappa-container">
+                    <button id="btn-map-offro" class="btn-toggle-map attivo-offro" onclick="impostaModalitaMappa('offro')">🎁 OFFRO (Vedi Compratori)</button>
+                    <button id="btn-map-cerco" class="btn-toggle-map" onclick="impostaModalitaMappa('cerco')">🔍 CERCO (Vedi Venditori)</button>
+                </div>
+            </div>
+
+            <div id="mappa-interattiva"></div>
+            <div id="mappa-legenda-testo" class="mappa-info-legenda">
+                🎁 Modalità OFFRO: Sulla mappa sono evidenziati i <b>COMPRATORI</b> (Ristoranti, Locali, Botteghe e Cittadini) che cercano i prodotti di questa sezione.
+            </div>
+        </div>
+
+        <!-- LISTA DEGLI ANNUNCI SPECIFICI DEL VENDITORE -->
+        <div class="lista-annunci-container">
+            <h2 class="section-title">📦 Annunci Disponibili dei Venditori</h2>
+            <div id="contenitore-annunci-grid" class="grid-annunci">
+                <p>Caricamento annunci in corso...</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Script di gestione -->
+    <script src="./2026-10-17_02_supabase-config.js"></script>
+    <script src="./2026-10-17_09_mappa-manager.js"></script>
+    <script src="./2026-10-18_02_annunci-manager.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Legge il nome della sezione inviato dalla Home
+            const urlParams = new URLSearchParams(window.location.search);
+            const nomeSezione = urlParams.get('nome') || 'Orto & Frutteto';
+
+            document.getElementById('titolo-sezione-corrente').innerText = "Reparto: " + nomeSezione;
+            document.title = "KM0 - " + nomeSezione;
+
+            // Carica gli annunci e la mappa per questa specifica sezione
+            if (typeof caricaAnnunciSezione === 'function') {
+                caricaAnnunciSezione(nomeSezione);
+            }
+        });
+    </script>
+
+</body>
+</html>
