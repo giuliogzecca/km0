@@ -53,17 +53,12 @@
         <!-- MAPPA INTERATTIVA DEL TERRITORIO -->
         <div class="box-mappa-sezione">
             <div class="mappa-header">
-                <h3>🗺️ Mappa del Territorio</h3>
-                
-                <div class="switch-mappa-container">
-                    <button id="btn-map-offro" class="btn-toggle-map attivo-offro" onclick="impostaModalitaMappa('offro')">🎁 OFFRO (Vedi Compratori)</button>
-                    <button id="btn-map-cerco" class="btn-toggle-map" onclick="impostaModalitaMappa('cerco')">🔍 CERCO (Vedi Venditori)</button>
-                </div>
+                <h3>🗺️ Mappa degli Annunci sul Territorio</h3>
             </div>
 
             <div id="mappa-interattiva"></div>
             <div id="mappa-legenda-testo" class="mappa-info-legenda">
-                🎁 Modalità OFFRO: Sulla mappa sono evidenziati i <b>COMPRATORI</b> che cercano i prodotti di questa sezione.
+                📍 Sulla mappa sono evidenziati i <b>VENDITORI E PRODUTTORI</b> che hanno pubblicato un annuncio in questa sezione. Clicca sulla spillina per vedere la foto e i contatti!
             </div>
         </div>
 
@@ -118,7 +113,7 @@
 
                 <div class="form-group">
                     <label for="annuncio-comune">Comune / Valle del Trentino:</label>
-                    <input type="text" id="annuncio-comune" placeholder="Es. Cles, Trento, Cembra..." required>
+                    <input type="text" id="annuncio-comune" placeholder="Es. Cles, Trento, Rovereto, Cavalese..." required>
                 </div>
 
                 <div class="form-group">
@@ -148,9 +143,9 @@
         </div>
     </div>
 
-    <!-- Script di gestione -->
+    <!-- Script di gestione dei mattoncini JavaScript -->
     <script src="./2026-10-17_02_supabase-config.js"></script>
-    <script src="./2026-10-17_09_mappa-manager.js"></script>
+    <script src="./2026-10-19_01_mappa-annunci-manager.js"></script>
     <script src="./2026-10-18_02_annunci-manager.js"></script>
     <script>
         function apriModuloAnnuncio() {
@@ -173,8 +168,13 @@
                 selectCategoria.value = nomeSezione;
             }
 
+            // Inizializza la mappa e carica gli annunci con le spilline!
             if (typeof caricaAnnunciSezione === 'function') {
-                caricaAnnunciSezione(nomeSezione);
+                caricaAnnunciSezione(nomeSezione).then(() => {
+                    if (typeof aggiornaSpillineMappa === 'function' && window.annunciCaricatiCorrenti) {
+                        aggiornaSpillineMappa(window.annunciCaricatiCorrenti);
+                    }
+                });
             }
         });
     </script>
