@@ -7,6 +7,7 @@
 
     <!-- Supabase e Mappa Leaflet -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
@@ -17,7 +18,7 @@
 </head>
 <body>
 
-    <!-- INSEGNA PRINCIPALE IDENTICA ALLA HOME -->
+    <!-- INSEGNA PRINCIPALE -->
     <header>
         <div class="logo-container">
             <svg class="logo-montagna-linea" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,15 +34,70 @@
 
     <div class="container">
 
-        <!-- BOTTONE PER TORNARE ALLA HOME -->
-        <div style="margin-bottom:25px;">
-            <a href="index.html" style="display:inline-block; background:#2d6a4f; color:white; padding:10px 20px; border-radius:10px; text-decoration:none; font-weight:bold;">
+        <!-- BOTTONI DI NAVIGAZIONE E INSERIMENTO ANNUNCIO -->
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px; margin-bottom:25px;">
+            <a href="index.html" style="display:inline-block; background:#2d6a4f; color:white; padding:12px 20px; border-radius:10px; text-decoration:none; font-weight:bold;">
                 ⬅️ Torna a tutte le Sezioni
             </a>
+
+            <!-- PULSANTE MAGICO PER PUBBLICARE UN ANNUNCIO -->
+            <button onclick="apriModuloAnnuncio()" style="background:linear-gradient(135deg, #2e7d32 0%, #388e3c 100%); color:white; border:none; padding:12px 24px; border-radius:10px; font-weight:bold; font-size:1.1rem; cursor:pointer; box-shadow:0 4px 12px rgba(46,125,50,0.3);">
+                ➕ Inserisci il tuo Annuncio con Foto
+            </button>
         </div>
 
         <!-- TITOLO SEZIONE DINAMICO -->
         <h2 id="titolo-sezione-corrente" class="section-title">Sezione Prodotto</h2>
+
+        <!-- MODULO A COMPARSA PER COMPILARE L'ANNUNCIO CON FOTO -->
+        <div id="box-nuovo-annuncio" class="box-adesione" style="display:none; margin-bottom:35px; border-color:#2e7d32; background:#f1f8e9;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                <h3 style="margin:0; color:#1b4332; font-size:1.5rem;">📝 Compila il tuo Annuncio per questa Sezione</h3>
+                <button onclick="chiudiModuloAnnuncio()" style="background:#e53935; color:white; border:none; padding:6px 12px; border-radius:6px; font-weight:bold; cursor:pointer;">✖ Chiudi</button>
+            </div>
+
+            <form id="form-nuovo-annuncio" onsubmit="salvaNuovoAnnuncio(event)">
+                <div class="form-group">
+                    <label for="annuncio-titolo">Titolo del Prodotto / Offerta:</label>
+                    <input type="text" id="annuncio-titolo" placeholder="Es. Mele Renetta, Cassetta Mirtilli, Legna da Ardere..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="annuncio-venditore">Nome Venditore / Azienda / Hobbista:</label>
+                    <input type="text" id="annuncio-venditore" placeholder="Es. Az. Agr. Rossi, Mario Bianchi..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="annuncio-comune">Comune / Valle del Trentino:</label>
+                    <input type="text" id="annuncio-comune" placeholder="Es. Cles, Trento, Rovereto, Val di Fiemme..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="annuncio-prezzo">Prezzo / Unità di Misura:</label>
+                    <input type="text" id="annuncio-prezzo" placeholder="Es. 1.50 € / kg oppure 80 € / bancale" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="annuncio-contatto">Contatto Diretto (Telefono o Email):</label>
+                    <input type="text" id="annuncio-contatto" placeholder="Es. 333 1234567 oppure info@azienda.it" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="annuncio-descrizione">Descrizione Dettagliata dell'Offerta:</label>
+                    <textarea id="annuncio-descrizione" rows="3" placeholder="Descrivi il tuo prodotto, la disponibilità e le modalità di consegna o ritiro..."></textarea>
+                </div>
+
+                <!-- CAMPO FOTO PRODOTTO -->
+                <div class="form-group" style="background:#ffffff; padding:15px; border-radius:10px; border:2px dashed #2e7d32;">
+                    <label for="annuncio-foto" style="color:#2e7d32; font-weight:bold;">📸 Carica una Foto del tuo Prodotto (Opzionale):</label>
+                    <input type="file" id="annuncio-foto" accept="image/*" style="border:none; padding:5px 0;">
+                </div>
+
+                <button type="submit" class="btn-adesione" style="background:linear-gradient(135deg, #2e7d32 0%, #388e3c 100%); color:white;">Pubblica Annuncio Ora</button>
+            </form>
+
+            <p id="messaggio-invio-annuncio" style="margin-top:15px; text-align:center; font-weight:bold;"></p>
+        </div>
 
         <!-- MAPPA INTERATTIVA DEL TERRITORIO -->
         <div class="box-mappa-sezione">
@@ -70,20 +126,27 @@
 
     </div>
 
-    <!-- Script di gestione -->
+    <!-- Script di gestione dei mattoncini JavaScript -->
     <script src="./2026-10-17_02_supabase-config.js"></script>
     <script src="./2026-10-17_09_mappa-manager.js"></script>
     <script src="./2026-10-18_02_annunci-manager.js"></script>
     <script>
+        function apriModuloAnnuncio() {
+            document.getElementById('box-nuovo-annuncio').style.display = 'block';
+            document.getElementById('box-nuovo-annuncio').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function chiudiModuloAnnuncio() {
+            document.getElementById('box-nuovo-annuncio').style.display = 'none';
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
-            // Legge il nome della sezione inviato dalla Home
             const urlParams = new URLSearchParams(window.location.search);
             const nomeSezione = urlParams.get('nome') || 'Orto & Frutteto';
 
             document.getElementById('titolo-sezione-corrente').innerText = "Reparto: " + nomeSezione;
             document.title = "KM0 - " + nomeSezione;
 
-            // Carica gli annunci e la mappa per questa specifica sezione
             if (typeof caricaAnnunciSezione === 'function') {
                 caricaAnnunciSezione(nomeSezione);
             }
