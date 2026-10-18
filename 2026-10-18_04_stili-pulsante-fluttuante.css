@@ -1,0 +1,72 @@
+/* --- STILI DEL PULSANTE VERDE FLUTTUANTE (FAB) E MODULO POPUP --- */
+
+/* Pulsante Verde + che segue lo scorrimento dello schermo */
+.btn-fluttuante-annuncio {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 65px;
+    height: 65px;
+    background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%);
+    color: #ffffff;
+    border: 3px solid #ffffff;
+    border-radius: 50%;
+    font-size: 32px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.btn-fluttuante-annuncio:hover {
+    transform: scale(1.12) rotate(90deg); /* Effetto rotazione magica al passaggio del mouse */
+    box-shadow: 0 10px 25px rgba(46, 125, 50, 0.5);
+    background: linear-gradient(135deg, #1b4332 0%, #2e7d32 100%);
+}
+
+/* Sfondo scuro semitrasparente quando si apre la finestra dell'annuncio */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(4px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+/* Finestra centrale popup dell'annuncio */
+.modal-contenuto {
+    background: #ffffff;
+    border-radius: 20px;
+    max-width: 650px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 30px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+    border: 3px solid #2e7d32;
+    position: relative;
+    animation: comparsaPopup 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes comparsaPopup {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
