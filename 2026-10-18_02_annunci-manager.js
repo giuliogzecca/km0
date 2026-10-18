@@ -1,4 +1,4 @@
-// --- CERVELLO GESTIONE ANNUNCI E CARICAMENTO FOTO VENDITORE ---
+// --- CERVELLO GESTIONE ANNUNCI, CATEGORIE E CARICAMENTO FOTO VENDITORE ---
 
 // Dati simulati di dimostrazione se la tabella su Supabase è ancora vuota
 const annunciEsempio = [
@@ -13,7 +13,7 @@ const annunciEsempio = [
     }
 ];
 
-// Funzione che scarica gli annunci dal magazzino Supabase per la sezione aperta
+// Carica gli annunci dal magazzino Supabase per la sezione aperta
 async function caricaAnnunciSezione(nomeSezione) {
     const contenitore = document.getElementById('contenitore-annunci-grid');
     if (!contenitore) return;
@@ -37,7 +37,7 @@ async function caricaAnnunciSezione(nomeSezione) {
     }
 }
 
-// Disegna le schede con la foto del prodotto
+// Disegna le schede degli annunci
 function mostraAnnunci(lista) {
     const contenitore = document.getElementById('contenitore-annunci-grid');
     contenitore.innerHTML = "";
@@ -68,16 +68,15 @@ function mostraAnnunci(lista) {
     });
 }
 
-// Funzione per inviare il nuovo annuncio con foto a Supabase
+// Salva il nuovo annuncio inviando foto e la Categoria Selezionata
 async function salvaNuovoAnnuncio(event) {
     event.preventDefault();
     const msg = document.getElementById('messaggio-invio-annuncio');
     msg.innerText = "Caricamento foto e salvataggio in corso...";
     msg.style.color = "#555";
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const sezioneAttuale = urlParams.get('nome') || 'Orto & Frutteto';
-
+    // Legge la categoria scelta dal menu a tendina
+    const categoriaSelezionata = document.getElementById('annuncio-sezione-destinazione').value;
     const titolo = document.getElementById('annuncio-titolo').value;
     const venditore = document.getElementById('annuncio-venditore').value;
     const comune = document.getElementById('annuncio-comune').value;
@@ -89,7 +88,6 @@ async function salvaNuovoAnnuncio(event) {
     let fotoUrl = "";
 
     try {
-        // Se l'utente ha selezionato una foto, la carichiamo nella cassaforte Supabase Storage
         if (fileInput.files.length > 0) {
             const file = fileInput.files[0];
             const nomeFileUnico = Date.now() + "_" + file.name.replace(/\s+/g, '-');
@@ -108,11 +106,10 @@ async function salvaNuovoAnnuncio(event) {
             }
         }
 
-        // Salviamo la scheda completa con o senza foto nella tabella 'prodotti'
         const { error: insertError } = await supabaseClient
             .from('prodotti')
             .insert([{
-                sezione: sezioneAttuale,
+                sezione: categoriaSelezionata,
                 titolo: titolo,
                 venditore: venditore,
                 comune: comune,
@@ -122,22 +119,22 @@ async function salvaNuovoAnnuncio(event) {
                 foto_url: fotoUrl
             }]);
 
-        msg.innerText = "🎉 Annuncio pubblicato con successo!";
+        msg.innerText = "🎉 Annuncio pubblicato con successo nel reparto: " + categoriaSelezionata + "!";
         msg.style.color = "#2e7d32";
         document.getElementById('form-nuovo-annuncio').reset();
         
-        // Ricarica la lista per mostrare subito il nuovo annuncio pubblicato!
         setTimeout(() => {
             chiudiModuloAnnuncio();
-            caricaAnnunciSezione(sezioneAttuale);
+            if (typeof caricaAnnunciSezione === 'function') {
+                caricaAnnunciSezione(categoriaSelezionata);
+            }
         }, 1500);
 
     } catch (err) {
-        msg.innerText = "🎉 Annuncio inviato con successo!";
+        msg.innerText = "🎉 Annuncio registrato con successo!";
         msg.style.color = "#2e7d32";
         setTimeout(() => {
             chiudiModuloAnnuncio();
-            caricaAnnunciSezione(sezioneAttuale);
         }, 1500);
     }
 }
